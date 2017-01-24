@@ -1,0 +1,3 @@
+rootProject.name = 'FlipkartClone'
+
+include ':app'
