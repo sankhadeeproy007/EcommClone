@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 export default styles = {
   container: {
-    flex: 1,
+    flex: 1
   },
   topView: {
     height: (Platform.OS==='ios') ? 272 : 250,

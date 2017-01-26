@@ -12,7 +12,7 @@ import {
   Text as RNText
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Button, Text, StyleProvider, Icon, Header, IconNB, Item, Input, Label, Container, Content, Footer, Left, Body } from 'native-base';
+import { Button, Text, Icon, Header, IconNB, Item, Input, Label, Container, Content, Footer, Left, Body } from 'native-base';
 import styles from './styles';
 
 export default class FirstPage extends Component {
