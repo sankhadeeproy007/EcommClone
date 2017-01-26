@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, StatusBar } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
 import Login from './Screens/login';
 import Home from './Screens/home';
@@ -15,8 +15,8 @@ export default class FlipkartClone extends Component {
     return (
       <Router>
         <Scene key="root">
-          <Scene key="login" component={Login} title="PageOne" hideNavBar initial={true} />
-          <Scene key="home" component={Home} title="PageOne" />
+          <Scene key="login" component={Login} title="PageOne" hideNavBar />
+          <Scene key="home" component={Home} title="PageOne" hideNavBar initial={true} />
         </Scene>
       </Router>
     );

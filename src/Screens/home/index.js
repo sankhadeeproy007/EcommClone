@@ -7,38 +7,31 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
+  Text as RNText,
   View
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Button, Text, StyleProvider, Icon, Header, IconNB, Item, Input, Label, Container, Content, Title, Left, Body, Right } from 'native-base';
 
 export default class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text onPress={()=> Actions.pop()} style={styles.welcome}>
+      <Container>
+        <Header style={{backgroundColor: '#2874F0'}}>
+          <Left>
+            <Button transparent>
+              <Icon name="menu" style={{color: '#fff'}} />
+            </Button>
+          </Left>
+          <Body>
+            <Title style={{color: '#fff'}}>Flipkart</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Text onPress={()=> Actions.pop()}>
           Welcome to React Native again!
         </Text>
-      </View>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
