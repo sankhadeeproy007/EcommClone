@@ -16,4 +16,12 @@ export default styles = {
     marginTop: -1,
     padding: 10
   },
+  categoryButton: {
+    flex: 1,
+    height: 50,
+    backgroundColor: '#2874F0'
+  },
+  categoryIcon: {
+    fontSize: (Platform.OS==='ios') ? 30 : undefined
+  }
 };

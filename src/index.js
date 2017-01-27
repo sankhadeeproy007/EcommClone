@@ -15,8 +15,8 @@ export default class FlipkartClone extends Component {
     return (
       <Router>
         <Scene key="root">
-          <Scene key="login" component={Login} hideNavBar initial={true} />
-          <Scene key="home" component={Home} />
+          <Scene key="home" component={Home} hideNavBar initial={true} />
+          <Scene key="login" component={Login} />
         </Scene>
       </Router>
     );
