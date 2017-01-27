@@ -14,21 +14,21 @@ export default class HomeGrid extends Component {
         <TouchableOpacity activeOpacity={0.85} style={{flex: 1, overflow: 'hidden', marginRight: 3}}>
           <Image style={styles.gridImage} source={data[0].image} />
           <View style={styles.orangeButton}>
-            <Text style={styles.orangeButtonText}>50-80% Off</Text>
+            <Text style={styles.orangeButtonText}>{data[0].buttonText}</Text>
           </View>
           <View style={styles.subText}>
-            <Text style={{fontSize: 13}}>Electronics & Auto</Text>
-            <Text style={styles.greenText}>Power Banks, Trimmers</Text>
+            <Text style={{fontSize: 13}}>{data[0].subText}</Text>
+            <Text style={styles.greenText}>{data[0].greenText}</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.85} style={{flex: 1, overflow: 'hidden', marginLeft: 4}}>
           <Image style={styles.gridImage} source={data[1].image} />
             <View style={styles.orangeButton}>
-              <Text style={styles.orangeButtonText}>50-80% Off</Text>
+              <Text style={styles.orangeButtonText}>{data[1].buttonText}</Text>
             </View>
             <View style={styles.subText}>
-              <Text style={{fontSize: 13}}>Electronics & Auto</Text>
-              <Text style={styles.greenText}>Power Banks, Trimmers</Text>
+              <Text style={{fontSize: 13}}>{data[1].subText}</Text>
+              <Text style={styles.greenText}>{data[1].greenText}</Text>
             </View>
         </TouchableOpacity>
       </View>

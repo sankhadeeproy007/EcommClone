@@ -71,10 +71,47 @@ const grid2Data = [
 ]
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      scroll : 0,
+      top: new Animated.Value(0)
+    }
+  }
+  onPageScroll(e) {
+    // if(e.nativeEvent.contentOffset.y < 50) {
+    //   this.forceUpdate();
+    // }
+
+    let scroll = this.state.scroll;
+    let currentScroll = e.nativeEvent.contentOffset.y;
+    this.setState({
+      scroll: currentScroll
+    });
+    if (currentScroll>scroll) {
+      Animated.timing(
+        this.state.top,
+        {
+          toValue: -50,
+          duration: 500
+        }
+      ).start();
+    }
+    else {
+      Animated.timing(
+        this.state.top,
+        {
+          toValue: 0,
+          duration: 500
+        }
+      ).start();
+    }
+
+  }
   render() {
     return (
       <View style={{height: deviceHeight}}>
-        <Animated.View>
+        <Animated.View style={{marginTop: this.state.top}}>
           <Header androidStatusBarColor='#235dbb' iosBarStyle='light-content' style={{backgroundColor: '#2874F0', elevation: 0}}>
             <Left>
               <Button transparent style={styles.headerLeftButton}>
@@ -100,7 +137,7 @@ export default class Home extends Component {
             <Input />
           </Item>
         </View>
-        <Content>
+        <Content bounces={false} scrollEventThrottle={0} onScroll={(e)=> this.onPageScroll(e)}>
           <View style={{height: 180}}>
             <ImageSwiper data={swipeData}  />
           </View>
