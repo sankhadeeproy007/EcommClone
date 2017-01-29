@@ -16,6 +16,7 @@ import {
   View
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect,  } from 'react-redux';
 import { Button, Text, Icon, Header, IconNB, Item, Input, Label, Container, Content, Title, Left, Body, Right } from 'native-base';
 import Swiper from 'react-native-swiper';
 
@@ -25,52 +26,7 @@ import styles from './styles';
 
 const deviceHeight = Dimensions.get('window').height;
 
-const swipeData = [
-  {
-    image: require('./../../../assets/images/macbook.jpg'),
-    text: 'Laptops starting at 14,999 only'
-  },
-  {
-    image: require('./../../../assets/images/camera.jpg'),
-    text: 'Cameras starting at 4,999 only'
-  },
-  {
-    image: require('./../../../assets/images/shoes.jpeg'),
-    text: 'Shoes starting at 2,199 only'
-  }
-]
-
-const grid1Data = [
-  {
-    image: require('./../../../assets/images/trimmer.jpeg'),
-    buttonText: '50-80% Off',
-    subText: 'Electronics & Auto',
-    greenText: 'Power Banks, Trimmers'
-  },
-  {
-    image: require('./../../../assets/images/man.jpeg'),
-    buttonText: '40-80% Off',
-    subText: 'Fashion & Lifestyle',
-    greenText: 'Clothing, Footwear'
-  }
-]
-
-const grid2Data = [
-  {
-    image: require('./../../../assets/images/iphone.jpg'),
-    buttonText: '26,990',
-    subText: 'iPhone (16 GB)',
-    greenText: '*no Exchange'
-  },
-  {
-    image: require('./../../../assets/images/guitar.jpg'),
-    buttonText: '2,599',
-    subText: 'Musical Instruments',
-    greenText: 'Guitars'
-  }
-]
-
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,36 +35,34 @@ export default class Home extends Component {
     }
   }
   onPageScroll(e) {
-    // if(e.nativeEvent.contentOffset.y < 50) {
-    //   this.forceUpdate();
-    // }
 
-    let scroll = this.state.scroll;
-    let currentScroll = e.nativeEvent.contentOffset.y;
-    this.setState({
-      scroll: currentScroll
-    });
-    if (currentScroll>scroll) {
-      Animated.timing(
-        this.state.top,
-        {
-          toValue: -50,
-          duration: 500
-        }
-      ).start();
-    }
-    else {
-      Animated.timing(
-        this.state.top,
-        {
-          toValue: 0,
-          duration: 500
-        }
-      ).start();
-    }
+    // let scroll = this.state.scroll;
+    // let currentScroll = e.nativeEvent.contentOffset.y;
+    // this.setState({
+    //   scroll: currentScroll
+    // });
+    // if (currentScroll>scroll) {
+    //   Animated.timing(
+    //     this.state.top,
+    //     {
+    //       toValue: -50,
+    //       duration: 500
+    //     }
+    //   ).start();
+    // }
+    // else {
+    //   Animated.timing(
+    //     this.state.top,
+    //     {
+    //       toValue: 0,
+    //       duration: 500
+    //     }
+    //   ).start();
+    // }
 
   }
   render() {
+    const { props: { swipeData, grid1Data, grid2Data } } = this;
     return (
       <View style={{height: deviceHeight}}>
         <Animated.View style={{marginTop: this.state.top}}>
@@ -155,3 +109,9 @@ export default class Home extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  swipeData: state.homePage.swipeData,
+  grid1Data: state.homePage.grid1Data,
+  grid2Data: state.homePage.grid2Data
+})
+export default connect(mapStateToProps)(Home);
