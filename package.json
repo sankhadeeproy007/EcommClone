@@ -5,9 +5,11 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "eject-native-base": "node node_modules/native-base/ejectTheme.js"
+    "eject-native-base": "node node_modules/native-base/ejectTheme.js",
+    "serve": "cd src/ && json-server generate.js"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "faker": "^3.1.0",
     "lodash": "^4.17.4",
     "native-base": "https://github.com/GeekyAnts/NativeBase#v2.0-test-cases",
@@ -20,7 +22,10 @@
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-logger": "^2.7.4"
+    "redux-logger": "^2.7.4",
+    "redux-promise-middleware": "^4.2.0",
+    "redux-saga": "^0.14.3",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

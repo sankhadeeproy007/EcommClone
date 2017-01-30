@@ -13,6 +13,7 @@ import {
   Platform,
   Dimensions,
   Animated,
+  ActivityIndicator,
   View
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -24,6 +25,8 @@ import ImageSwiper from './../../SharedComponents/ImageSwiper';
 import HomeGrid from './../../SharedComponents/HomeGrid';
 import styles from './styles';
 
+import { fetchSwipeData } from './../../actions/homeActions';
+
 const deviceHeight = Dimensions.get('window').height;
 
 class Home extends Component {
@@ -33,6 +36,9 @@ class Home extends Component {
       scroll : 0,
       top: new Animated.Value(0)
     }
+  }
+  componentWillMount() {
+    this.props.fetchSwipeData();
   }
   onPageScroll(e) {
 
@@ -62,7 +68,7 @@ class Home extends Component {
 
   }
   render() {
-    const { props: { swipeData, grid1Data, grid2Data } } = this;
+    const { props: { swipeData, grid1Data, grid2Data, swipeDataLoading } } = this;
     return (
       <View style={{height: deviceHeight}}>
         <Animated.View style={{marginTop: this.state.top}}>
@@ -92,8 +98,12 @@ class Home extends Component {
           </Item>
         </View>
         <Content bounces={false} scrollEventThrottle={0} onScroll={(e)=> this.onPageScroll(e)}>
-          <View style={{height: 180}}>
-            <ImageSwiper data={swipeData}  />
+          <View style={{height: 180, justifyContent: (swipeDataLoading) ? 'center' : undefined}}>
+            {(swipeDataLoading) ?
+              <ActivityIndicator style={{alignSelf: 'center'}} size="large" color="#2874F0" />
+              :
+              <ImageSwiper data={swipeData}  />
+            }
           </View>
           <View style={{height: 50, flexDirection: 'row'}}>
             <Button full style={styles.categoryButton}><Icon style={styles.categoryIcon} name="phone-portrait" /></Button>
@@ -111,7 +121,11 @@ class Home extends Component {
 }
 const mapStateToProps = state => ({
   swipeData: state.homePage.swipeData,
+  swipeDataLoading: state.homePage.swipeDataLoading,
   grid1Data: state.homePage.grid1Data,
   grid2Data: state.homePage.grid2Data
 })
-export default connect(mapStateToProps)(Home);
+const bindActions = dispatch => ({
+  fetchSwipeData: () => dispatch(fetchSwipeData())
+})
+export default connect(mapStateToProps, bindActions)(Home);

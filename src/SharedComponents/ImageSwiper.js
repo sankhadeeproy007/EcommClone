@@ -15,7 +15,7 @@ export default class ImageSwiper extends Component {
         {data.map((item, i) => {
           return (
             <TouchableOpacity key={i} style={styles.swiperButton} activeOpacity={0.95}>
-              <Image style={styles.swiperImage} source={item.image}
+              <Image style={styles.swiperImage} source={{uri: item.image}}
                 />
               <Text style={styles.swiperText}>{item.text}</Text>
             </TouchableOpacity>

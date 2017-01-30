@@ -10,6 +10,8 @@ import { Router, Scene } from 'react-native-router-flux';
 import { connect, Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import promise from 'redux-promise-middleware';
 
 import reducers from './reducers';
 
@@ -17,9 +19,8 @@ import Login from './Screens/login';
 import Home from './Screens/home';
 
 const RouterWithRedux = connect()(Router);
-const middleware = applyMiddleware(logger());
+const middleware = applyMiddleware(promise(), thunk, logger());
 const store = compose(middleware)(createStore)(reducers);
-
 
 export default class FlipkartClone extends Component {
   render() {

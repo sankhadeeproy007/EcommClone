@@ -1,18 +1,6 @@
 export default function reducer(state={
-  swipeData: [
-    {
-      image: require('./../../assets/images/macbook.jpg'),
-      text: 'Laptops starting at 14,999 only'
-    },
-    {
-      image: require('./../../assets/images/camera.jpg'),
-      text: 'Cameras starting at 4,999 only'
-    },
-    {
-      image: require('./../../assets/images/shoes.jpeg'),
-      text: 'Shoes starting at 2,199 only'
-    }
-  ],
+  swipeDataLoading: true,
+  swipeData: [],
   grid1Data: [
     {
       image: require('./../../assets/images/trimmer.jpeg'),
@@ -43,26 +31,26 @@ export default function reducer(state={
   ]
 }, action) {
 
-switch (action.type) {
-case "FETCH_TABLE": {
-return {...state, fetching: true};
-}
-case "FETCH_TABLE_REJECTED": {
-return {...state, fetching: false, error: action.payload};
-}
-case "FETCH_TABLE_FULFILLED": {
-return {
-...state,
-fetching: false,
-fetched: true,
-table: action.payload.standing,
-matchday: action.payload.matchday,
-};
-}
-case "FETCH_TABLE_RESET": {
-return {...state, fetched: false};
-}
-default:
-return state;
-}
+  switch (action.type) {
+    case "FETCH_SWIPE_DATA_FULFILLED": {
+      return {...state, swipeDataLoading: false, swipeData: action.payload};
+    }
+  case "FETCH_TABLE_REJECTED": {
+  return {...state, fetching: false, error: action.payload};
+  }
+  case "FETCH_TABLE_FULFILLED": {
+  return {
+  ...state,
+  fetching: false,
+  fetched: true,
+  table: action.payload.standing,
+  matchday: action.payload.matchday,
+  };
+  }
+  case "FETCH_TABLE_RESET": {
+  return {...state, fetched: false};
+  }
+  default:
+  return state;
+  }
 }
