@@ -25,7 +25,7 @@ import ImageSwiper from './../../SharedComponents/ImageSwiper';
 import HomeGrid from './../../SharedComponents/HomeGrid';
 import styles from './styles';
 
-import { fetchSwipeData } from './../../actions/homeActions';
+import { fetchSwipeData, fetchGrid1Data, fetchGrid2Data } from './../../actions/homeActions';
 
 const deviceHeight = Dimensions.get('window').height;
 
@@ -39,6 +39,8 @@ class Home extends Component {
   }
   componentWillMount() {
     this.props.fetchSwipeData();
+    this.props.fetchGrid1Data();
+    this.props.fetchGrid2Data();
   }
   onPageScroll(e) {
 
@@ -68,7 +70,7 @@ class Home extends Component {
 
   }
   render() {
-    const { props: { swipeData, grid1Data, grid2Data, swipeDataLoading } } = this;
+    const { props: { swipeData, grid1Data, grid2Data, swipeDataLoading, grid1DataLoading, grid2DataLoading } } = this;
     return (
       <View style={{height: deviceHeight}}>
         <Animated.View style={{marginTop: this.state.top}}>
@@ -112,8 +114,31 @@ class Home extends Component {
             <Button full style={styles.categoryButton}><Icon style={styles.categoryIcon} name="laptop" /></Button>
             <Button full style={styles.categoryButton}><Icon style={styles.categoryIcon} name="print" /></Button>
           </View>
-          <HomeGrid data={grid1Data} />
-          <HomeGrid data={grid2Data} />
+          {(!grid1DataLoading) && <HomeGrid data={grid1Data} />}
+          {(!grid2DataLoading) && <HomeGrid data={grid2Data} />}
+          <View style={{height: 350}}>
+            <View style={{height: 80, borderWidth: 1, flexDirection: 'row'}}>
+              <View style={{flex: 1}}  />
+              <View style={{flex: 3, padding: 10, justifyContent: 'space-around'}}>
+                <Text style={{fontWeight: '600'}}>Minimum 60% off</Text>
+                <Text style={{color: '#8e8e8e', fontSize: 13}}>Wrangler, Puma...</Text>
+              </View>
+              <View style={{flex: 1.5, justifyContent: 'center', alignItems: 'center'}}>
+                <Button style={{backgroundColor: '#2874F0', alignSelf: 'center', height: 25}}>
+                  <Text style={{fontSize: 14}}>View All</Text>
+                </Button>
+              </View>
+            </View>
+            <View style={{flexDirection: 'row', flex: 1, borderWidth: 1}}>
+              <View style={{flex: 2}}>
+                
+              </View>
+              <View style={{flex: 1}}>
+                <View style={{borderWidth: 1, flex: 1}}></View>
+                <View style={{borderWidth: 1, flex: 1}}></View>
+              </View>
+            </View>
+          </View>
         </Content>
       </View>
     );
@@ -122,10 +147,14 @@ class Home extends Component {
 const mapStateToProps = state => ({
   swipeData: state.homePage.swipeData,
   swipeDataLoading: state.homePage.swipeDataLoading,
+  grid1DataLoading: state.homePage.grid1DataLoading,
+  grid2DataLoading: state.homePage.grid2DataLoading,
   grid1Data: state.homePage.grid1Data,
   grid2Data: state.homePage.grid2Data
 })
 const bindActions = dispatch => ({
-  fetchSwipeData: () => dispatch(fetchSwipeData())
+  fetchSwipeData: () => dispatch(fetchSwipeData()),
+  fetchGrid1Data: () => dispatch(fetchGrid1Data()),
+  fetchGrid2Data: () => dispatch(fetchGrid2Data())
 })
 export default connect(mapStateToProps, bindActions)(Home);

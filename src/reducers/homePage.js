@@ -1,43 +1,31 @@
 export default function reducer(state={
   swipeDataLoading: true,
   swipeData: [],
-  grid1Data: [
-    {
-      image: require('./../../assets/images/trimmer.jpeg'),
-      buttonText: '50-80% Off',
-      subText: 'Electronics & Auto',
-      greenText: 'Power Banks, Trimmers'
-    },
-    {
-      image: require('./../../assets/images/man.jpeg'),
-      buttonText: '40-80% Off',
-      subText: 'Fashion & Lifestyle',
-      greenText: 'Clothing, Footwear'
-    }
-  ],
-  grid2Data: [
-    {
-      image: require('./../../assets/images/iphone.jpg'),
-      buttonText: '26,990',
-      subText: 'iPhone (16 GB)',
-      greenText: '*no Exchange'
-    },
-    {
-      image: require('./../../assets/images/guitar.jpg'),
-      buttonText: '2,599',
-      subText: 'Musical Instruments',
-      greenText: 'Guitars'
-    }
-  ]
+  grid1Data: [],
+  grid1DataLoading: true,
+  grid2Data: [],
+  grid2DataLoading: true,
 }, action) {
 
   switch (action.type) {
     case "FETCH_SWIPE_DATA_FULFILLED": {
       return {...state, swipeDataLoading: false, swipeData: action.payload};
     }
-  case "FETCH_TABLE_REJECTED": {
-  return {...state, fetching: false, error: action.payload};
-  }
+    case "FETCH_SWIPE_DATA_FAILED": {
+      return {...state};
+    }
+    case "FETCH_GRID1_DATA_FULFILLED": {
+      return {...state, grid1DataLoading: false, grid1Data: action.payload};
+    }
+    case "FETCH_GRID1_DATA_FAILED": {
+      return {...state};
+    }
+    case "FETCH_GRID2_DATA_FULFILLED": {
+      return {...state, grid2DataLoading: false, grid2Data: action.payload};
+    }
+    case "FETCH_GRID2_DATA_FAILED": {
+      return {...state};
+    }
   case "FETCH_TABLE_FULFILLED": {
   return {
   ...state,

@@ -12,7 +12,7 @@ export default class HomeGrid extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={0.85} style={{flex: 1, overflow: 'hidden', marginRight: 3}}>
-          <Image style={styles.gridImage} source={data[0].image} />
+          <Image style={styles.gridImage} source={{uri: data[0].image}} />
           <View style={styles.orangeButton}>
             <Text style={styles.orangeButtonText}>{data[0].buttonText}</Text>
           </View>
@@ -22,7 +22,7 @@ export default class HomeGrid extends Component {
           </View>
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.85} style={{flex: 1, overflow: 'hidden', marginLeft: 4}}>
-          <Image style={styles.gridImage} source={data[1].image} />
+          <Image style={styles.gridImage} source={{uri: data[1].image}} />
             <View style={styles.orangeButton}>
               <Text style={styles.orangeButtonText}>{data[1].buttonText}</Text>
             </View>
